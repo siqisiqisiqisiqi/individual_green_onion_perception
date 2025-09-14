@@ -1,0 +1,8 @@
+.vscode/
+validate_data/camera_param/**
+!validate_data/camera_param/.gitkeep
+validate_data/depth/**
+!validate_data/depth/.gitkeep
+validate_data/rgb/**
+!validate_data/rgb/.gitkeep
+weights/**
