@@ -59,7 +59,6 @@ def compute_width_profile(points,
     S_HI = np.full(K, np.nan, dtype=np.float32)
     S_LO = np.full(K, np.nan, dtype=np.float32)
 
-    
     for i, tk in enumerate(t_k):
         mask = np.abs(t - tk) <= slab_halfwidth
         if np.count_nonzero(mask) < min_pts:
@@ -122,7 +121,7 @@ def compute_width_profile(points,
         fig.canvas.draw()
         renderer = fig.canvas.get_renderer()
         rgba = np.asarray(renderer.buffer_rgba())     # shape (h, w, 4)
-        bgr = cv2.cvtColor(rgba, cv2.COLOR_RGBA2BGR) 
+        bgr = cv2.cvtColor(rgba, cv2.COLOR_RGBA2BGR)
         plt.close(fig)
         return (x_norm, width, max_l, max_width, bgr)
     else:
@@ -166,9 +165,9 @@ for img_path in rgb_images:
 
     res = model(images, verbose=False, retina_masks=True)[0]
     masks = res_2_mask(res)
-    #colors in rgb01
+    # colors in rgb01
     points, colors = project_mask_to_points(bgr, height, masks)
-    
+
     WIN = "instance+profile"
     cv2.namedWindow(WIN, cv2.WINDOW_NORMAL)
 
@@ -178,10 +177,10 @@ for img_path in rgb_images:
 
         # print(f"x_norm is {max_l}.")
         # print(f"width is {max_width}.")
-        
+
         vis = show_instance_v2(masks, bgr, idx)
         k = stack_and_show(vis, bgr_profile, layout="vertical", winname=WIN)
-        if k == ord('q'):   
+        if k == ord('q'):
             cv2.destroyAllWindows()               # quit
             break
     break
